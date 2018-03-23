@@ -1,0 +1,22 @@
+{% ckan_extends %}
+
+{% set pkg = c.pkg_dict %}
+{% set pkg_dict = c.pkg_dict %}
+
+
+{% block content_action %}
+  {% link_for _('View dataset'), controller='package', action='read', id=pkg.name, class_='btn', icon='eye-open' %}
+{% endblock %}
+
+{% block content_primary_nav %}
+  {{ h.build_nav_icon('dataset_edit', _('Edit metadata'), id=pkg.name) }}
+  {{ h.build_nav_icon('dataset_resources', _('Resources'), id=pkg.name) }}
+{% endblock %}
+
+{% block secondary_content %}
+  <h2 class="module-heading"><i class="icon-info-sign"></i> {{ _('Extent Editpr') }}</h2>
+  {% snippet 'package/snippets/info.html', pkg=pkg, hide_follow_button=true %}
+  {{ super() }}
+  {% set dataset_extent = h.get_pkg_dict_extra(c.pkg_dict, 'spatial', '') %}
+  {% snippet "spatial/snippets/dataset_map_sidebar_edit.html", extent=dataset_extent %}
+{% endblock %}

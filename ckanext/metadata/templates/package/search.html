@@ -1,0 +1,13 @@
+{% ckan_extends %}
+{% import 'macros/form.html' as form %}
+
+{% block secondary_content %}
+  {% snippet "spatial/snippets/spatial_query.html" %}
+  {% for facet in c.facet_titles %}
+    {{ h.snippet('snippets/facet_list.html', title=c.facet_titles[facet], name=facet) }}
+  {% endfor %}
+   {% block package_social %}
+    {% snippet "snippets/social.html" %}
+  {% endblock %}
+ 
+{% endblock %}
