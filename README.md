@@ -49,3 +49,21 @@ $ nosetests --ckan --with-pylons=test.ini tests/
 
 #### Note
 Before testing metadata: ckanext-metadata/ckanext/metadata/, your ckan environment on your machine has to point to the same database that you're going to use in ckanext-metadata/ckanext/metadata/test.ini.
+
+## Debugging
+
+Every time you pull new changes into your existing repository, you should restart services to make sure all the files are compiled. You can use the following command for this:
+
+```
+$ supervisorctl restart all
+```
+If you run into issues while pulling new changes into your existing repository, you should run setup.py which will set up the environment correctly. See below:
+
+```
+$ python setup.py egg_info
+```
+Also, if you run into issues with the website being inaccessible, you can restart the http service by using the following command:
+
+```
+$ service httpd restart
+``` 
